@@ -154,3 +154,13 @@ predict(model,
 
 ##If the context is about single value we should use prediction
 #if the confidence is about average of certain value we should use confidence
+
+
+#Scatter Plot
+
+p <- predict(model, interval = "prediction")
+
+data <- cbind(roller, p)
+str(data)
+ggplot(data, aes(x=weight, y=depression)) + geom_point()+geom_smooth(method = "lm") + ggtitle('Depression Vs Weight', 'Source: Roller data  from DAAG')  + 
+  geom_line(aes(y= lwr), color = "red", linetype = "dashed", lwd = 2) + geom_line(aes(y= upr), color = "red", linetype = "dashed", lwd = 2)
