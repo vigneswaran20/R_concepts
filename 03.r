@@ -140,7 +140,7 @@ fitted.values(model)
 #Diagnostics
 par(mfrow = c(2,2))
 plot(model)
-
+dev.off()
 
 #Prediction
 predict(model, 
@@ -153,7 +153,7 @@ predict(model,
         interval = "prediction")
 
 ##If the context is about single value we should use prediction
-#if the confidence is about average of certain value we should use confidence
+#if the context is about average of certain value we should use confidence
 
 
 #Scatter Plot
@@ -164,3 +164,22 @@ data <- cbind(roller, p)
 str(data)
 ggplot(data, aes(x=weight, y=depression)) + geom_point()+geom_smooth(method = "lm") + ggtitle('Depression Vs Weight', 'Source: Roller data  from DAAG')  + 
   geom_line(aes(y= lwr), color = "red", linetype = "dashed", lwd = 2) + geom_line(aes(y= upr), color = "red", linetype = "dashed", lwd = 2)
+
+
+#Quadratic term
+
+model1 <- lm(depression ~ weight + I(weight^2), roller)
+summary(model1)
+
+
+#CLT
+library(TeachingDemos)
+clt.examp(1)
+clt.examp(10)
+clt.examp(30)
+
+
+#Normality
+x <- rnorm(1000)
+qqnorm(x, col="green")
+qqline(x, col="red")
